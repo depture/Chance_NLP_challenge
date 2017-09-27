@@ -61,7 +61,7 @@ The main steps are :
 * Try XGboost (F1-score ~ 64) [5 fold stratified cross validation]
 * Save vectorization and models parameters for later usage
 3. Application
-* The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data [format = (type, [comments]) or ([], [comments])]. It will write in the data folder the type predictions for the given comments.
+* The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data. It will write in the data folder the type predictions for the given comments.
 
 TO DO:
 - Scrape urls 
