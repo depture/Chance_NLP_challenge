@@ -63,3 +63,7 @@ The main steps are :
 
 
 This is a simple model which trains relatively quickly. The cross validation outputed an f1-score of ~64. It is possible to search for hyper paramaters with bayesian optimisation to improve accuracy. Also, a pre-trained word embeddings like glove in a neural model may bring more insight. I only add the count of youtube videos per link in comments. A lot of them are dead links but it would be interesting to scrap the different urls to extract more information.
+
+TO DO:
+- Hyper Parameter Optimization
+- Convolutional Network with glove embedding
