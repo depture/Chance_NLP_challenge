@@ -3,6 +3,7 @@ import os
 import numpy as np
 import pickle
 import re
+import xgboost as xgb
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
@@ -12,6 +13,7 @@ def check_remove(FileName):
     if os.path.isfile(FileName):
         os.remove(FileName)
 
+		dataset = '/Users/Dupi/venv_py_3/Chance/Chance_NLP_challenge/data/mbti_1.csv'
 def MBTI_XGB(dataset):
 
 	# Load data
@@ -24,14 +26,14 @@ def MBTI_XGB(dataset):
 						'ISFP', 'ISTP', 'ISFJ', 'ISTJ', 'ESTP', 'ESFP', 'ESTJ', 'ESFJ']
 	lab_encoder = LabelEncoder().fit(unique_type_list)
 
-	##### Compute list of subject with Type | list of comments | list of url
-	print("Preprocessing dataset")
+	##### Compute list of subject with Type | list of comments | list of url | count youtube videos
 
 	list_subject = []
 
 	for row in data.iterrows():
 		list_comment = []
 		list_url = []
+		list_youtube = []
 		posts = row[1].posts
 		for post in posts.split("|||"):
 			urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', post)
@@ -40,13 +42,14 @@ def MBTI_XGB(dataset):
 				list_url += urls
 			if any(post):
 				list_comment.append(post)
+		list_youtube += [sum([1 for s in list_url if "youtube" in s])]
 
 		type_labelized = lab_encoder.transform([row[1].type])[0]
-		list_subject.append([type_labelized, list_comment, list_url])
+		list_subject.append([type_labelized, list_comment, list_url, list_youtube])
 
 	del data
 	subject_type = np.array([subject[0] for subject in list_subject])
-	subject_comments = ["".join(subject[1]) for subject in list_subject]
+	# subject_comments = ["".join(subject[1]) for subject in list_subject]
 
 	##### Remove and clean comments
 
@@ -69,7 +72,8 @@ def MBTI_XGB(dataset):
 	CountVect = pickle.load(open("data/CountVect.pickle.dat", "rb"))
 	X_vectorized = CountVect.transform(subject_comments_1).toarray()
 
-	X_concat = np.column_stack((X_tfidf, X_vectorized))
+	count_youtube = [c[3][0] for c in list_subject]
+	X_concat = np.column_stack((X_tfidf, X_vectorized, count_youtube))
 
 	# load model from file
 	loaded_model = pickle.load(open("data/model.pickle.dat", "rb"))
@@ -102,7 +106,7 @@ def MBTI_XGB(dataset):
 		plt.xlabel('Predicted label')
 
 
-	import xgboost as xgb
+	# XGboost
 
 	xg_test = xgb.DMatrix(X_concat)
 
@@ -123,7 +127,7 @@ def MBTI_XGB(dataset):
 		# Plot normalized confusion matrix
 		plt.figure()
 		plot_confusion_matrix(cnf_matrix, classes=lab_encoder.inverse_transform(range(16)), normalize=True,
-							  title='Normalized confusion matrix')
+							  title='Confusion matrix')
 
 	print("\nSaving preds in data/MBTI_XGB_predictions.txt")
 
