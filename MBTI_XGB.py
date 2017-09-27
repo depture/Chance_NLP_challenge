@@ -21,7 +21,7 @@ def MBTI_XGB(dataset):
 
 	# Load data
 	print("Loading data")
-	data = pd.read_csv(dataset)  # dtype = {'type': str,'post': ,
+	data = pd.read_csv(dataset)  # dtype = {'type': str,'post': str}
 
 	##### Encode each type to an int
 
