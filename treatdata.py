@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pandas as pd
 import os
 import numpy as np
@@ -8,6 +10,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report
+
 
 def check_remove(FileName):
     if os.path.isfile(FileName):
@@ -136,7 +139,7 @@ def MBTI_XGB(dataset):
 		outfile.write("\n".join(lab_encoder.inverse_transform(preds.astype(int))))
 
 
-
-MBTI_XGB("data/mbti_1.csv")
+if __name__ == '__main__':
+	MBTI_XGB("data/mbti_1.csv")
 
 
