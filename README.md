@@ -51,11 +51,15 @@ The main steps are :
 * Load data using pandas
 * Split each row by type | comments | urls posted | count youtube videos
 * Cleaning each comments by removing numbers and spaces and join them into a single text
-* Run tf-idf and bag of words vectorization
-* Add pca 
+
 2. Learning phase
+* Run tf-idf and bag of words vectorization
+* Try pca (no improvements, if more data investigate feature reduction to improve speed)
 * Try Multinomial Naive Bayes (F1-score ~ 54) [5 fold stratified cross validation]
 * Try XGboost (F1-score ~ 64) [5 fold stratified cross validation]
 * Save vectorization and models parameters for later usage
 3. Application
 * The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data. 
+
+
+This is a simple model which trains relatively quickly. The cross validation outputed an f1-score of ~64. It is possible to search for hyper paramaters with bayesian optimisation to improve accuracy. Also, a pre-trained word embeddings like glove in a neural model may bring more insight. I only add the count of youtube videos per link in comments. A lot of them are dead links but it would be interesting to scrap the different urls to extract more information.
