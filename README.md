@@ -59,7 +59,7 @@ The main steps are :
 * Try XGboost (F1-score ~ 64) [5 fold stratified cross validation]
 * Save vectorization and models parameters for later usage
 3. Application
-* The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data (format = (type, comments)) 
+* The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data [format = (type, [comments]) or ([], [comments])]. It will write in the data folder the type predictions for the given comments.
 
 
 This is a simple model which trains relatively quickly. The cross validation outputed an f1-score of ~64. It is possible to search for hyper paramaters with bayesian optimisation to improve accuracy. Also, a pre-trained word embeddings like glove in a neural model may bring more insight. I only add the count of youtube videos per link in comments. A lot of them are dead links but it would be interesting to scrap the different urls to extract more information. 
