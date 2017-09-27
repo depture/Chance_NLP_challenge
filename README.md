@@ -62,8 +62,10 @@ The main steps are :
 * The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data. 
 
 
-This is a simple model which trains relatively quickly. The cross validation outputed an f1-score of ~64. It is possible to search for hyper paramaters with bayesian optimisation to improve accuracy. Also, a pre-trained word embeddings like glove in a neural model may bring more insight. I only add the count of youtube videos per link in comments. A lot of them are dead links but it would be interesting to scrap the different urls to extract more information.
+This is a simple model which trains relatively quickly. The cross validation outputed an f1-score of ~64. It is possible to search for hyper paramaters with bayesian optimisation to improve accuracy. Also, a pre-trained word embeddings like glove in a neural model may bring more insight. I only add the count of youtube videos per link in comments. A lot of them are dead links but it would be interesting to scrap the different urls to extract more information. It is 
 
 TO DO:
+- Balance the dataset with oversampling or undersampling
+- Try to ouput the probabilities for a letter instead of a personality (much bigger dataset) and merge the 4 highest
 - Hyper Parameter Optimization
 - Convolutional Network with glove embedding
