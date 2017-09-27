@@ -64,6 +64,7 @@ The main steps are :
 * The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data [format = (type, [comments]) or ([], [comments])]. It will write in the data folder the type predictions for the given comments.
 
 TO DO:
+- Scrape urls 
 - Balance the dataset with resampling techniques
 - Try to ouput the probabilities for a letter instead of a personality (much bigger dataset) and merge the 4 highest
 - Hyper Parameter Optimization
