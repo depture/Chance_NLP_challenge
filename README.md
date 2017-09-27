@@ -53,10 +53,9 @@ The main steps are :
 * Cleaning each comments by removing numbers and spaces and join them into a single text
 * Run tf-idf and bag of words vectorization
 * Add pca 
-
 1. Learning phase
 * Try Multinomial Naive Bayes (F1-score ~ 54) [5 fold stratified cross validation]
 * Try XGboost (F1-score ~ 64) [5 fold stratified cross validation]
 * Save vectorization and models parameters for later usage
-
-It is possible to treat new data with the function MBTI_XGB.py.
+1. Application
+* The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data. 
