@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 import numpy as np
 import pickle
 import re
@@ -6,6 +7,10 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report
+
+def check_remove(FileName):
+    if os.path.isfile(FileName):
+        os.remove(FileName)
 
 def MBTI_XGB(dataset):
 
@@ -122,6 +127,7 @@ def MBTI_XGB(dataset):
 
 	print("\nSaving preds in data/MBTI_XGB_predictions.txt")
 
+	check_remove('data/MBTI_XGB_predictions.txt')
 	with open('data/MBTI_XGB_predictions.txt', 'a') as outfile:
 		outfile.write("\n".join(lab_encoder.inverse_transform(preds.astype(int))))
 
