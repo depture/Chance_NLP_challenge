@@ -40,7 +40,7 @@ to :
 1. Run ```git bundle create YOURNAME.bundle HEAD ```
 1. Send the generated file by email to tech-interview@chance.co
 
-# Description 
+## Description 
 
 An ipython notebook describe step by step the choice i took to implement the algorithm.
 Ii is implemented in Python 3.6.
