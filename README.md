@@ -53,7 +53,7 @@ The main steps are :
 * Load data using pandas
 * Split each row by type | comments 
 * Cleaning each comments by :
-    * removing all urls replace by dummy word 'link'
+    * removing all urls replaced by dummy word 'link'
     * removing everything except letters
     * removing larger spaces and lowering
     * removing stopwords and lemmatizing
@@ -65,20 +65,25 @@ The main steps are :
 * Try Multinomial Naive Bayes (F1-score ~ 58) [5 fold stratified cross validation]
 * Try XGboost (F1-score ~ 64) [5 fold stratified cross validation]
 * Save vectorization and models parameters for later usage
+
 3. Application
 * The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data
 
 TO DO:
-- Scrape urls 
+- Scrape urls and extract topic of pages
 - Balance the dataset with resampling techniques
-- Try to ouput the probabilities for a letter instead of a personality (much bigger dataset) and merge the 4 highest
+- Try to ouput the probabilities for a letter instead of a personality (multioutput) and merge the 4 highest
 - Hyper Parameter Optimization
 - Convolutional Network with glove embedding
 
-The notebook contains a multi-output classifier based on 4 adaboost models. As the letters are only paired by two, the problem is to predict 4 binary variables. The cross validation gives a mean error of 
+The notebook contains a multi-output classifier based on 4 adaboost models. As the letters are only paired by two, the problem is to predict 4 binary variables. The cross validation gives the following table.
 
 Attribute| IE  | NS  | FT  | JP  |   
 |:-:|---|---|---|---|
 Score|0.59 | 0.44 | 0.8 |  0.83| 
+
+This gives us insight about what are the axes that the algorithm may fail at identifying (S Sensation vs N Intuition).
+
+Finally there are two neural networks, (1D convnet and LSTM) but I did not have the time to tune them.
 
 
