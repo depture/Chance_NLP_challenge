@@ -80,7 +80,7 @@ The notebook contains a multi-output classifier based on 4 adaboost models. As t
 
 Attribute| I-E  | N-S  | F-T  | J-P  |   
 |:-:|---|---|---|---|
-Score|0.59 | 0.44 | 0.8 |  0.83| 
+F1-Score|0.59 | 0.44 | 0.8 |  0.83| 
 
 This gives us insight about what are the axes that the algorithm may fail at identifying (S Sensation vs N Intuition).
 
