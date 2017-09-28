@@ -75,6 +75,7 @@ TO DO:
 - Try to ouput the probabilities for a letter instead of a personality (multioutput) and merge the 4 highest
 - Hyper Parameter Optimization
 - Convolutional Network with glove embedding
+- Search multiple classifiers (not correlated) and stack them and build pipeline with Lasso.
 
 The notebook contains a multi-output classifier based on 4 adaboost models. As the letters are only paired by two, the problem is to predict 4 binary variables. The cross validation gives the following table.
 
