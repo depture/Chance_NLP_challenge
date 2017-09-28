@@ -42,7 +42,7 @@ to :
 
 ## Description 
 
-This is a simple model which trains relatively quickly. The cross validation outputed an f1-score of ~64. It is possible to search for hyper paramaters with bayesian optimisation to improve accuracy. Also, a pre-trained word embeddings like glove in a neural model may bring more insight. I only add the count of youtube videos per link in comments. A lot of them are dead links but it would be interesting to scrap the different urls to extract more information. 
+This is a simple model which trains relatively quickly. The cross validation output an f1-score of ~64. It is possible to search for hyper paramaters with bayesian optimisation to improve accuracy. Also, a pre-trained word embeddings like glove in a neural model may bring more insight. A lot of the links are dead links but it would be interesting to scrap the different urls to extract more information. 
 
 An ipython notebook describe step by step the choice i took to implement the algorithm.
 Ii is implemented in Python 3.6.
@@ -51,17 +51,22 @@ The main steps are :
 
 1. Treat data
 * Load data using pandas
-* Split each row by type | comments | urls posted | count youtube videos
-* Cleaning each comments by removing numbers and spaces and join them into a single text
+* Split each row by type | comments 
+* Cleaning each comments by :
+    * removing all urls replace by dummy word 'link'
+    * removing everything except letters
+    * removing larger spaces and lowering
+    * removing stopwords and lemmatizing
+ * Labelizing each mbti personality
 
 2. Learning phase
-* Run tf-idf and bag of words vectorization
-* Try pca (no improvements, if more data investigate feature reduction to improve speed)
-* Try Multinomial Naive Bayes (F1-score ~ 54) [5 fold stratified cross validation]
+* Run tf-idf and count vectorization of words vectorization (the final model trains only with count vector)
+* Try pca, fast\_ica (no improvements, if more data investigate feature reduction to improve speed)
+* Try Multinomial Naive Bayes (F1-score ~ 58) [5 fold stratified cross validation]
 * Try XGboost (F1-score ~ 64) [5 fold stratified cross validation]
 * Save vectorization and models parameters for later usage
 3. Application
-* The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data. It will write in the data folder the type predictions for the given comments.
+* The function MBTI\_XGB loads precalculated vectorizer and boosting model to train new data
 
 TO DO:
 - Scrape urls 
@@ -69,3 +74,11 @@ TO DO:
 - Try to ouput the probabilities for a letter instead of a personality (much bigger dataset) and merge the 4 highest
 - Hyper Parameter Optimization
 - Convolutional Network with glove embedding
+
+The notebook contains a multi-output classifier based on 4 adaboost models. As the letters are only paired by two, the problem is to predict 4 binary variables. The cross validation gives a mean error of 
+
+Attribute| IE  | NS  | FT  | JP  |   
+|:-:|---|---|---|---|
+Score|0.59 | 0.44 | 0.8 |  0.83| 
+
+
