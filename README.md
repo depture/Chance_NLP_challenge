@@ -78,7 +78,7 @@ TO DO:
 
 The notebook contains a multi-output classifier based on 4 adaboost models. As the letters are only paired by two, the problem is to predict 4 binary variables. The cross validation gives the following table.
 
-Attribute| IE  | NS  | FT  | JP  |   
+Attribute| I-E  | N-S  | F-T  | J-P  |   
 |:-:|---|---|---|---|
 Score|0.59 | 0.44 | 0.8 |  0.83| 
 
